@@ -8,6 +8,7 @@ from langchain_community.vectorstores import Chroma
 from langchain_core.runnables import RunnableLambda, RunnablePassthrough
 from langchain_nomic import NomicEmbeddings
 from langchain_nomic.embeddings import NomicEmbeddings
+from langchain_community.chat_models import ChatOllama
 
 from dotenv import load_dotenv
 from langchain.callbacks.tracers.langchain import wait_for_all_tracers
@@ -38,4 +39,21 @@ vectorstore = Chroma.from_documents(
 )
 retriever = vectorstore.as_retriever()
 
-print(retriever.get_relevant_documents("Talk decomposition"))
+# Chain block
+template = """
+Answer the question based only on the following context:
+{context}
+Question: 
+{question}
+"""
+prompt = ChatPromptTemplate.from_template(template)
+
+chain = (
+        {
+            "context": retriever,
+            "question": RunnablePassthrough()
+        } | prompt | ChatOllama(model = "mistral:instruct") | StrOutputParser()
+)
+
+if __name__ == "__main__":
+    print(chain.invoke("What are types of agent memory?"))
