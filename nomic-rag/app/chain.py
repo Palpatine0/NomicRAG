@@ -53,7 +53,7 @@ chain = (
             "context": retriever,
             "question": RunnablePassthrough()
         } | prompt | ChatOllama(model = "mistral:instruct") | StrOutputParser()
-)
+).with_types(input_type = str)
 
 if __name__ == "__main__":
     print(chain.invoke("What are types of agent memory?"))
