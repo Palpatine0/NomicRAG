@@ -101,7 +101,7 @@ Make sure u have created a LangSmith project for this lab.
 
 #### 1: Create a Account
 
-- **Access Exa:**
+- **Access Nomic:**
 
   Navigate to [Nomic](https://atlas.nomic.ai/cli-login).
 
@@ -115,7 +115,7 @@ Make sure u have created a LangSmith project for this lab.
    <img src="https://i.imghippo.com/files/gsXJj1718273891.jpg" alt="" border="0">
    <img src="https://i.imghippo.com/files/2eVwV1718273981.jpg" alt="" border="0">
 
-2 **Login to nomic by your API key:**
+2. **Login to nomic by your API key:**
 
    ```bash
    nomic login your_nomic_api_key
